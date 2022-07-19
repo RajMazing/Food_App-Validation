@@ -54,7 +54,7 @@ const AvailableMeals = () => {
 		);
 	}
 
-	//if backend isnt displaying then this validation eill pass
+	//if backend isnt displaying then this validation will pass
 	if (httpError) {
 		return (
 			<section className={classes.MealsError}>
@@ -62,7 +62,6 @@ const AvailableMeals = () => {
 			</section>
 		);
 	}
-	//meals are fetched!
 	const mealsList = meals.map((meal) => (
 		<MealItem
 			key={meal.id}
