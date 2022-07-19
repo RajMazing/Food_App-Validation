@@ -21,6 +21,7 @@ const AvailableMeals = () => {
 				throw new Error("SOMETHING WENT WRONG");
 			}
 
+
 			const responseData = await response.json();
 
 			const loadedMeals = [];
@@ -54,7 +55,7 @@ const AvailableMeals = () => {
 		);
 	}
 
-	//if backend isnt displaying then this validation eill pass
+	//if backend isnt displaying then this validation will pass
 	if (httpError) {
 		return (
 			<section className={classes.MealsError}>
