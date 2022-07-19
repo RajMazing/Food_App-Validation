@@ -5,13 +5,23 @@ import MealItem from "./MealItem/MealItem";
 import classes from "./AvailableMeals.module.css";
 
 const AvailableMeals = () => {
+	//useState hook
 	const [meals, setMeals] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const [httpError, setHttpError] = useState();
 	useEffect(() => {
+		//connecting to firebase backend
 		const fetchMeals = async () => {
 			const response = await fetch(
-				"https://react-http-requests-78a78-default-rtdb.firebaseio.com/Meals.json"
+				"https://react-http-requests-78a78-default-rtdb.firebaseio.com/meals.json"
 			);
+
+			//response validation
+			if (!response.ok) {
+				throw new Error("SOMETHING WENT WRONG");
+			}
+
+
 			const responseData = await response.json();
 
 			const loadedMeals = [];
@@ -27,13 +37,29 @@ const AvailableMeals = () => {
 			setMeals(loadedMeals);
 			setIsLoading(false);
 		};
-		fetchMeals();
+
+		//when fetch method cannot get information from backend
+		//this error will display in place of server information
+		fetchMeals().catch((error) => {
+			setIsLoading(false);
+			setHttpError(error.message);
+		});
 	}, []);
 
+	//If backend is truthy then display this p tag message
 	if (isLoading) {
 		return (
 			<section className={classes.MealsLoading}>
 				<p>Loading...</p>
+			</section>
+		);
+	}
+
+	//if backend isnt displaying then this validation will pass
+	if (httpError) {
+		return (
+			<section className={classes.MealsError}>
+				<p>{httpError}</p>
 			</section>
 		);
 	}
