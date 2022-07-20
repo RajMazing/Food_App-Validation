@@ -27,6 +27,7 @@ const Cart = (props) => {
 	};
 
 	//data that we are sending to the backend
+
 	const submitOrderHandler = async (userData) => {
 		setIsSubmitting(true);
 		await fetch(
@@ -43,6 +44,7 @@ const Cart = (props) => {
 		setDidSubmit(true);
 		cartCtx.clearCart();
 	};
+
 
 	const cartItems = (
 		<ul className={classes["cart-items"]}>
@@ -79,9 +81,11 @@ const Cart = (props) => {
 				<span>Total Amount</span>
 				<span>{totalAmount}</span>
 			</div>
+
 			{isCheckout && (
 				<Checkout onConfirm={submitOrderHandler} onCancel={props.onClose} />
 			)}
+
 			{!isCheckout && modalActions}
 		</>
 	);
