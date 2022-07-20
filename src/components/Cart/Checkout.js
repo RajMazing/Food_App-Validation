@@ -12,7 +12,7 @@ const Checkout = (props) => {
 		city: true,
 		postalCode: true,
 	});
-=
+
 
 	const nameInputRef = useRef();
 	const streetInputRef = useRef();
@@ -112,4 +112,6 @@ const Checkout = (props) => {
 	);
 };
 
+
 export default Checkout;
+
